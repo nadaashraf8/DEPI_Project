@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ['male', 'female', 'other', 'prefer not to say']
+      enum: ['male', 'female']
     },
     activityLevel: {
       type: String,
@@ -51,14 +51,10 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-// Method to check if password matches
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
-
-// Hash password before saving
 UserSchema.pre('save', async function (next) {
-  // Only hash the password if it's modified or new
   if (!this.isModified('password')) {
     return next();
   }
