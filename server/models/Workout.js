@@ -36,7 +36,6 @@ const WorkoutSchema = new mongoose.Schema(
       type: Date,
       default: Date.now
     },
-    // Additional fields for specific workout types
     sets: {
       type: Number,
       min: 0
